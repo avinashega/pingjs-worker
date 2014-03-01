@@ -21,7 +21,7 @@ module.exports={
 	ping: function(id){
 		i.jobService().getById(id).then(function(job){
 			if(job){
-				i.siteService().getSiteById(job.data.id).then(function(site){
+				i.siteService().getSiteById(job.data._id).then(function(site){
 					if(site){
 						var status;
 						var starttime = Date.now();

@@ -7,9 +7,9 @@
 	    },
 	    "amqp": {
 	    	"RABBITMQ_RX_URL": "amqp://YXTHrqGo:h8ibbYNS3w1YmPaHkl85LQLxsObi8_tj@spotted-hazel-4.bigwig.lshift.net:10557/Fq9-5NruBZ3j",
-	    	"job_queue":"jobs_queue"
+	    	"job_queue":"jobs_queue_dev"
 	    },
 	    "mongodb":{
-	    	"uri":"mongodb://avinash:avinash@troup.mongohq.com:10095/app22646956"
+	    	"uri":"mongodb://aviansh:avinash@localhost:27017/pingjs"
 	    },
 }
