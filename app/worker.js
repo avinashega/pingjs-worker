@@ -7,7 +7,7 @@ module.exports = function(){
   	  var ok = conn.createChannel();
       console.log('connected to rabbitMQ');
   	  ok = ok.then(function(ch) {
-  	    ch.consume('jobs_queue', function(msg) {
+  	    ch.consume(config.amqp.job_queue, function(msg) {
   	      if (msg !== null) {
   	    	  console.log('processing job '+msg.content.toString());
   	    	  i.pingService().ping(msg.content.toString());

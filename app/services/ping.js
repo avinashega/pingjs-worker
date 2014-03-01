@@ -5,6 +5,7 @@ var agendaJobs = i.db().agendaJobs;
 var ObjectID = require('mongoskin').ObjectID;
 var logger = require('./logger');
 var request = require('request');
+var activity = i.db().activity;
 
 _setJobIsPinging = function(id, status) {
     q.nbind(agendaJobs.update, agendaJobs) (
@@ -47,6 +48,7 @@ module.exports={
 								site.last_status = status;
 								i.userService().getByUsername(site.username).then(function(user){
 									return i.emailService().statusChange(user, site);
+									q.nbind(activity.save, activity)({date:Date.now(), username:site.username, activity:'Check Performed: '+site.url+' is '+status});
 								}).fail(function(err){
 									console.log(err);
 								})
