@@ -1,0 +1,35 @@
+{
+  "name": "pingjs-worker",
+  "version": "0.0.1",
+  "description": "Worker for Pingjs monitor service",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avinashega/pingjs-worker.git"
+  },
+  "keywords": [
+    "uptime",
+    "monitor"
+  ],
+  "dependencies": {
+    "request": "*",
+    "express": "*",
+    "jade": "*",
+    "stylus": "*",
+    "underscore": "*",
+    "mongojs": "*",
+    "wepay": "*",
+    "winston":"*",
+    "agenda":"*",
+    "mongoskin":"*",
+    "q":"*",
+    "getconfig":"*",
+    "mandrill-api":"*",
+    "amqplib":"*"
+ },
+  "author": "Avinash Ega",
+  "engines": {
+    "node": "0.10.12",
+    "npm": "1.1.x"
+  }
+}

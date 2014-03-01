@@ -1,0 +1,19 @@
+{
+		"mandrill": {
+	        "apikey": "eBwZ2GI_5GabmN46DMNT2Q"
+	    },
+	    "emails":{
+	    	"info":"info@pingjs.com"
+	    },
+	    "amqp": {
+	    	"RABBITMQ_RX_URL": "amqp://guest:guest@localhost:5672",
+	    	"job_queue":"jobs_queue"
+	    },
+   	"mongo":{
+   		"host":"localhost",
+   		"port":"27017",
+   		"username":"aviansh",
+   		"password":"avinash",
+   		"db":"pingjs"
+   	}
+}
