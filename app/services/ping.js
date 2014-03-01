@@ -25,7 +25,10 @@ module.exports={
 					if(site){
 						var status;
 						var starttime = Date.now();
-						var url = site.protocol+"://"+site.url+ site.port != ""? ":"+site.port : "";
+						var url = site.protocol+"://"+site.url;
+						if(site.port && site.port != ""){
+							url+= ":"+site.port;
+						}
 						request.head({url: url, timeout: 30*1000}, function (error, response, body) { //configure timeout later
 							var endtime = Date.now();
 							var responsetime = endtime - starttime;
