@@ -21,7 +21,7 @@
     "wepay": "*",
     "winston":"*",
     "agenda":"*",
-    "mongoskin":"*",
+    "mongoskin":"0.6.1",
     "q":"*",
     "getconfig":"*",
     "mandrill-api":"*",
