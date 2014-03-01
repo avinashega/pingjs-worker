@@ -2,6 +2,7 @@ var fs = require('fs'),
 	jade = require('jade');
 	q = require('q'),
 	i = require('../interface'),
+	config = require('getconfig');
 	agenda = i.agenda();
 var statusChange;
 module.exports = {
