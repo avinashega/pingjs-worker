@@ -42,7 +42,7 @@ module.exports={
 						    }
 							if(status != site.last_status){
 								site.last_status = status;
-								i.userService().getByUsername(site.account).then(function(user){
+								i.userService().getByUsername(site.username).then(function(user){
 									return i.emailService().statusChange(user, site);
 								}).fail(function(err){
 									console.log(err);
