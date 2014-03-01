@@ -1,6 +1,6 @@
 var config = require('getconfig');
 var Agenda = require('agenda');
-    url = "mongodb://"+config.mongo.username+":"+config.mongo.password+"@"+config.mongo.host+":"+config.mongo.port+"/"+config.mongo.db+"/?auto_reconnect=true",
+url = config.mongodb.uri + '?auto_reconnect',
     agenda = new Agenda({
         db: {
             address: url,

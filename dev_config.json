@@ -6,14 +6,10 @@
 	    	"info":"info@pingjs.com"
 	    },
 	    "amqp": {
-	    	"RABBITMQ_RX_URL": "amqp://guest:guest@localhost:5672",
+	    	"RABBITMQ_RX_URL": "amqp://YXTHrqGo:h8ibbYNS3w1YmPaHkl85LQLxsObi8_tj@spotted-hazel-4.bigwig.lshift.net:10557/Fq9-5NruBZ3j",
 	    	"job_queue":"jobs_queue"
 	    },
-   	"mongo":{
-   		"host":"localhost",
-   		"port":"27017",
-   		"username":"aviansh",
-   		"password":"avinash",
-   		"db":"pingjs"
-   	}
+	    "mongodb":{
+	    	"uri":"mongodb://avinash:avinash@troup.mongohq.com:10095/app22646956"
+	    },
 }

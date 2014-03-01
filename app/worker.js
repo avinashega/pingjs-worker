@@ -1,6 +1,6 @@
 var i = require('./interface');
 var config = require('getconfig');
-var amqp = require('amqplib').connect(config.amqp.RABBITMQ_TX_URL);
+var amqp = require('amqplib').connect(config.amqp.RABBITMQ_RX_URL);
 
 module.exports = function(){
 	amqp.then(function(conn) {
