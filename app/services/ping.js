@@ -41,6 +41,8 @@ module.exports={
 								var statusCode="";
 								if(response){
 									statusCode = response.statusCode;
+								} else {
+									console.log(error);
 								}
 								logger.info(JSON.stringify({'url': url, 'status': status, 'code': statusCode, 'time': Date.now(), 'response_time': responsetime}));
 						    }
