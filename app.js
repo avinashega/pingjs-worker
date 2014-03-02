@@ -26,7 +26,9 @@ app.configure('development', function(){
 var agenda = require('./app/bootstraps/agenda');
 require('./app/bootstraps/agenda-jobs')(agenda);
 console.log('init jobs, ok.');
-
+console.log('start newrelic on job worker');
+require('newrelic');
+console.log('finished starting newrelic on job worker');
 require('./app/worker')();
 console.log('init ping, ok.');
 

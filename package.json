@@ -25,7 +25,8 @@
     "q":"*",
     "getconfig":"*",
     "mandrill-api":"*",
-    "amqplib":"*"
+    "amqplib":"*",
+    "newrelic":"*"
  },
   "author": "Avinash Ega",
   "engines": {
