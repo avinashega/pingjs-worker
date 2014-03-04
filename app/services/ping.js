@@ -25,16 +25,17 @@ module.exports={
 				i.siteService().getSiteById(job.data._id).then(function(site){
 					if(site){
 						var status;
-						var starttime = Date.now();
 						var url = site.protocol+"://"+site.url;
 						if(site.port && site.port != ""){
 							url+= ":"+site.port;
 						}
-						request.head({url: url, timeout: 30*1000}, function (error, response, body) { //configure timeout later
+						var starttime = Date.now();
+						request(url, function (error, response, body) { //configure timeout later
 							var endtime = Date.now();
 							var responsetime = endtime - starttime;
 							if (!error && (response.statusCode >= 200 && response.statusCode <= 300)) {
 								status = 'UP';
+								q.nbind(checks.save, checks)({url: url, username: site.username, id:site._id.toString(), status: status, code: response.statusCode, time: starttime, response_time: responsetime});
 								logger.info(JSON.stringify({'url': url, 'status': status, 'code': response.statusCode, 'time': endtime, 'response_time': responsetime}));
 							} else {
 								status = 'DOWN';
@@ -44,7 +45,8 @@ module.exports={
 								} else {
 									console.log(error);
 								}
-								logger.info(JSON.stringify({'url': url, 'status': status, 'code': statusCode, 'time': Date.now(), 'response_time': responsetime}));
+								q.nbind(checks.save, checks)({url: url, username: site.username, id:site._id.toString(), status: status, code: statusCode, time: starttime, response_time: responsetime});
+								logger.info(JSON.stringify({'url': url, 'status': status, 'code': statusCode, 'time': starttime, 'response_time': responsetime}));
 						    }
 							if(status != site.last_status){
 								site.last_status = status;
@@ -59,8 +61,15 @@ module.exports={
 							site.last_status_change = endtime;
 							if(!site.pingCount)
 								site.pingCount = 0;
-							pingCount = site.pingCount+1;
-							q.nbind(sites.update, sites)({_id:site._id}, {$set:{last_status:status, last_status_change:endtime, pingCount:pingCount}});
+							var averageResponseTime = 0;
+							var pingCount = site.pingCount+1;
+							if(!site.averageResponseTime){
+								averageResponseTime = responsetime;
+							} else {
+								averageResponseTime = ((site.averageResponseTime*site.pingCount)+responsetime)/pingCount;
+							}
+							var averageResponsiveTime = 
+							q.nbind(sites.update, sites)({_id:site._id}, {$set:{last_status:status, last_status_change:endtime, pingCount:pingCount, averageResponseTime: averageResponseTime}});
 							_setJobIsPinging(id, false);
 						});
 					} else {
