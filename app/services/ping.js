@@ -6,6 +6,7 @@ var ObjectID = require('mongoskin').ObjectID;
 var logger = require('./logger');
 var request = require('request');
 var activity = i.db().activity;
+var checks = i.db().checks;
 
 _setJobIsPinging = function(id, status) {
     q.nbind(agendaJobs.update, agendaJobs) (
