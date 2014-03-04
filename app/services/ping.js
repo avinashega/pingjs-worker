@@ -57,6 +57,7 @@ module.exports={
 									i.emailService().statusChange(user, site);
 								}
 								i.checkService().averageResponseTime(site._id.toString(), 5).then(function(avgResponseTime){
+									console.log(avgResponseTime, parseInt(site.responsiveness));
 									if(avgResponseTime > parseInt(site.responsiveness)){
 										i.emailService().responseThreshold(user, site, avgResponseTime);
 									}

@@ -4,7 +4,7 @@ var fs = require('fs'),
 	i = require('../interface'),
 	config = require('getconfig');
 	agenda = i.agenda();
-var statusChange;
+var statusChange, responsiveAlert;
 module.exports = {
 		statusChange: function(user, site){
 			if(!statusChange){
@@ -37,9 +37,9 @@ module.exports = {
 			var data = {
                     html: html,
                     text: 'High Response Time Alert',
-                    subject: 'Pingjs: High Response Time Alerts for your Check'+site.url,
+                    subject: 'ALERT High Response Time: '+site.url+' [pingjs.com]',
                     from_email: config.emails.info,
-                    from_name: 'Pingjs',
+                    from_name: 'Pingjs Alerts',
                     to:[{
                     	email: user.email,
                     	type: 'to'

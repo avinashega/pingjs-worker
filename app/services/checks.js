@@ -7,7 +7,7 @@ module.exports={
 				if(!checks || checks.length == 0){
 					return 0;
 				}
-				var sum;
+				var sum=0;
 				for(var i=0;i<checks.length;i++){
 					sum+=checks[i].response_time
 				}
