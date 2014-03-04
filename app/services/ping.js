@@ -49,19 +49,19 @@ module.exports={
 								q.nbind(checks.save, checks)({url: url, username: site.username, id:site._id.toString(), status: status, code: statusCode, time: starttime, response_time: responsetime});
 								logger.info(JSON.stringify({'url': url, 'status': status, 'code': statusCode, 'time': starttime, 'response_time': responsetime}));
 						    }
-							if(status != site.last_status){
-								site.last_status = status;
-								i.userService().getByUsername(site.username).then(function(user){
+							
+							i.userService().getByUsername(site.username).then(function(user){
+								if(status != site.last_status){
+									site.last_status = status;
 									q.nbind(activity.save, activity)({date:Date.now(), username:site.username, activity:'Check Performed: '+site.url+' is '+status});
 									i.emailService().statusChange(user, site);
-									i.checkService().averageResponseTime(site._id.toString(), 5).then(function(avgResponseTime){
-										if(avgResponseTime > parseInt(site.responsiveness)){
-											i.emailService().responseThreshold(user, site, avgResponseTime);
-										}
-									});
+								}
+								i.checkService().averageResponseTime(site._id.toString(), 5).then(function(avgResponseTime){
+									if(avgResponseTime > parseInt(site.responsiveness)){
+										i.emailService().responseThreshold(user, site, avgResponseTime);
+									}
 								});
-								
-							}
+							});
 							site.last_status_change = endtime;
 							if(!site.pingCount)
 								site.pingCount = 0;
