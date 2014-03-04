@@ -52,11 +52,14 @@ module.exports={
 							if(status != site.last_status){
 								site.last_status = status;
 								i.userService().getByUsername(site.username).then(function(user){
-									return i.emailService().statusChange(user, site);
 									q.nbind(activity.save, activity)({date:Date.now(), username:site.username, activity:'Check Performed: '+site.url+' is '+status});
-								}).fail(function(err){
-									console.log(err);
-								})
+									i.emailService().statusChange(user, site);
+									i.checkService().averageResponseTime(site._id.toString(), 5).then(function(avgResponseTime){
+										if(avgResponseTime > parseInt(site.responsiveness)){
+											i.emailService().responseThreshold(user, site, avgResponseTime);
+										}
+									});
+								});
 								
 							}
 							site.last_status_change = endtime;

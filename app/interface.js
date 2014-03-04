@@ -31,5 +31,8 @@ module.exports = {
     },
     pingService: function(){
     	return require('./services/ping');
+    },
+    checkService: function(){
+    	return require('./services/checks');
     }
 };

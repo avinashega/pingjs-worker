@@ -27,5 +27,27 @@ module.exports = {
             console.log('saving job');
             job = agenda.create('email', data);
             return q.nbind(job.save, job)();
+		},
+		responseThreshold: function(user, site, responsiveness){
+			if(!responsiveAlert){
+				var data = fs.readFileSync('views/email/responsiveAlert.jade', 'utf8');
+				responsiveAlert = jade.compile(data);
+			}
+			var html = responsiveAlert({user:user, site:site, responsiveness:responsiveness});
+			var data = {
+                    html: html,
+                    text: 'High Response Time Alert',
+                    subject: 'Pingjs: High Response Time Alerts for your Check'+site.url,
+                    from_email: config.emails.info,
+                    from_name: 'Pingjs',
+                    to:[{
+                    	email: user.email,
+                    	type: 'to'
+                    }]                        
+                },
+                job;
+            console.log('saving job');
+            job = agenda.create('email', data);
+            return q.nbind(job.save, job)();
 		}
 };
