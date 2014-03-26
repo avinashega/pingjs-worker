@@ -68,15 +68,20 @@ module.exports={
 							site.last_status_change = endtime;
 							if(!site.pingCount)
 								site.pingCount = 0;
+							if(!site.downtimeCount)
+								site.downtimeCount=0;
 							var averageResponseTime = 0;
 							var pingCount = site.pingCount+1;
+							var downtimeCount = site.downtimeCount;
+							if(status == 'DOWN')
+								downtimeCount++;
 							if(!site.averageResponseTime){
 								averageResponseTime = responsetime;
 							} else {
 								averageResponseTime = ((site.averageResponseTime*site.pingCount)+responsetime)/pingCount;
 							}
 							var averageResponsiveTime = 
-							q.nbind(sites.update, sites)({_id:site._id}, {$set:{last_status:status, last_status_change:endtime, pingCount:pingCount, averageResponseTime: averageResponseTime}});
+							q.nbind(sites.update, sites)({_id:site._id}, {$set:{last_status:status, last_status_change:endtime, pingCount:pingCount, averageResponseTime: averageResponseTime, downtimeCount:downtimeCount}});
 							_setJobIsPinging(id, false);
 						});
 					} else {
