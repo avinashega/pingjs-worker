@@ -37,7 +37,7 @@ module.exports = {
 			var data = {
                     html: html,
                     text: 'High Response Time Alert',
-                    subject: 'ALERT High Response Time: '+site.url+' [pingjs.com]',
+                    subject: 'ALERT High Response Time: '+site.url+' [pingjs.in]',
                     from_email: config.emails.info,
                     from_name: 'Pingjs Alerts',
                     to:[{
